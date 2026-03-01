@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,14 +26,22 @@ Route::get('school/{schoolid}/delete',[SchoolController::class,'schoolDelete'])-
 Route::post('school/{schoolid}/delete',[SchoolController::class,'processSchoolDelete'])->name('processSchoolDelete');
 Route::post('school/{schoolid}/delete/finalize',[SchoolController::class,'finalizeSchoolDelete'])->name('finalizeSchoolDelete');
 
-Route::get('dept/list',[SchoolController::class,'departmentList'])->name('departmentList');
 
-Route::get('dept/create',[SchoolController::class,'departmentCreate'])->name('departmentCreate');
-Route::post('dept/create',[SchoolController::class,'processDepartmentCreate'])->name('processDepartmentCreate');
+Route::get('dept',[DepartmentController::class,'chooseSchool'])->name('chooseSchool');
+Route::post('dept',[DepartmentController::class,'processChooseSchool'])->name('processChooseSchool');
 
-Route::get('dept/{school}/update',[SchoolController::class,'departmentUpdate'])->name('departmentUpdate');
-Route::put('dept/{school}/update',[SchoolController::class,'processDepartmentUpdate'])->name('processDepartmentUpdate');
+Route::get('dept/list',[DepartmentController::class,'departmentList'])->name('departmentList');
 
-Route::get('dept/{schoolid}/delete',[SchoolController::class,'departmentDelete'])->name('departmentDelete');
-Route::post('dept/{schoolid}/delete',[SchoolController::class,'processDepartmentDelete'])->name('processDepartmentDelete');
-Route::post('dept/{schoolid}/delete/finalize',[SchoolController::class,'finalizeDepartmentDelete'])->name('finalizeDepartmentDelete');
+Route::get('dept/create',[DepartmentController::class,'departmentCreate'])->name('departmentCreate');
+Route::post('dept/create',[DepartmentController::class,'processDepartmentCreate'])->name('processDepartmentCreate');
+
+Route::get('dept/{school}/update',[DepartmentController::class,'departmentUpdate'])->name('departmentUpdate');
+Route::put('dept/{school}/update',[DepartmentController::class,'processDepartmentUpdate'])->name('processDepartmentUpdate');
+
+Route::get('dept/{schoolid}/delete',[DepartmentController::class,'departmentDelete'])->name('departmentDelete');
+Route::post('dept/{schoolid}/delete',[DepartmentController::class,'processDepartmentDelete'])->name('processDepartmentDelete');
+Route::post('dept/{schoolid}/delete/finalize',[DepartmentController::class,'finalizeDepartmentDelete'])->name('finalizeDepartmentDelete');
+
+
+Route::get('program',[ProgramController::class,'chooseSchoolDepartment'])->name('chooseSchoolDepartment');
+Route::post('program',[ProgramController::class,'processChooseSchoolDepartment'])->name('processChooseSchoolDepartment');
