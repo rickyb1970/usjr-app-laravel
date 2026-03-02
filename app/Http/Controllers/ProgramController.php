@@ -31,29 +31,39 @@ class ProgramController extends Controller
 
             $school = School::find(session()->get('program.selection.school'));
 
-            $department = Department::find($school['schoolid']);
+            $department = Department::find($request->departmentID);
 
-            $programs = Program::where('progschoolid', $school['schoolid'])->where('progschooldeptid', $department['deptid'])->orderBy('deptfullname')->simplePaginate(7);
+            if(!$department){
+                session()->forget('program.selection.school');
+                return redirect()->back();
+            }
 
-            return view('program.programList', compact('programs'));
+            // dd($department);
+
+            $programs = Program::where('progschoolid','=', $school['schoolid'])
+                       ->where('progschooldeptid', '=', $department['deptid'])
+                       ->orderBy('progid')
+                       ->simplePaginate(7);
+
+
+            return view('program.programList', compact('programs', 'school', 'department'));
 
         } else {
 
-            // dd('here');
-
             session()->put('program.selection.school', $request->schoolID);
-
-            // dd(session()->get('programm.selection.school'));
 
             $school = School::find($request->schoolID);
 
-            // dd($school);
-
             if($school){
-               dd('here');
-               return to_route('chooseSchoolDepartment')->with('school', $school);
+
+               $departments = Department::where('deptschoolid', $request->schoolID)->get();
+
+               return view('program.chooseSchoolDepartment')->with(compact('school', 'departments'));
+
             } else {
+
                return redirect()->back();
+
             }
 
         }
