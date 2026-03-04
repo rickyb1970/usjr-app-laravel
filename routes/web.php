@@ -3,6 +3,7 @@
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -45,3 +46,6 @@ Route::post('dept/{schoolid}/delete/finalize',[DepartmentController::class,'fina
 
 Route::get('program',[ProgramController::class,'chooseSchoolDepartment'])->name('chooseSchoolDepartment');
 Route::post('program',[ProgramController::class,'processChooseSchoolDepartment'])->name('processChooseSchoolDepartment');
+
+Route::get('student',[StudentController::class,'chooseSchoolDepartmentProgram'])->name('chooseSchoolDepartmentProgram');
+Route::post('student',[StudentController::class,'processChooseSchoolDepartmentProgram'])->name('processChooseSchoolDepartmentProgram');

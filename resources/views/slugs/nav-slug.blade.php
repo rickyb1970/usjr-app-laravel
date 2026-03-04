@@ -4,7 +4,7 @@
         <li><a href="{{ route('schoolList') }}">Schools</a></li>
         <li><a href="{{ route('chooseSchool') }}">Departments</a></li>
         <li><a href="{{ route('chooseSchoolDepartment') }}">Programs</a></li>
-        <li><a href="index.php?section=student&page=chooseSchoolDepartmentProgram">Students</a></li>
-        <li><a href="index.php?section=user&page=userDash">Users</a></li>
+        <li><a href="{{ route('chooseSchoolDepartmentProgram') }}">Students</a></li>
+        <li><a href="">Users</a></li>
     </ul>
 </aside>
